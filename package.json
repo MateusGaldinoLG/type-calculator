@@ -1,0 +1,14 @@
+{
+  "name": "calculadora-ts",
+  "version": "1.0.0",
+  "description": "Calculadora usando typescript e Tailwind CSS",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss build tailwind-logic/tailwind-src/styles.css -o tailwind-logic/public/styles.css"
+  },
+  "author": "Mateus Galdino",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^2.1.4"
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../tailwind-logic/public/styles.css">
+    <title>Index</title>
+</head>
+<body class="p-10 box-border font-sans font-normal
+ bg-gradient-to-r from-blue-600 to-green-600">
+    <div id="calculator-grid"
+    class="grid justify-center content-center min-h-screen grid-cols-4 grid-rows-5">
+        <div id="output" class="col-span-full bg-black bg-opacity-75 flex flex-col items-end justify-around p-3 break-words break-all">
+            <div data-previous id="previous-operand" class="text-white text-opacity-75 text-2xl"></div>
+            <div data-current id="current-operand"  class="text-white text-4xl"></div>
+        </div>
+        <button data-all-clear class="span-two calc-btn">AC</button>
+        <button data-delete class="calc-btn">DEL</button>
+        <button data-operation class="calc-btn">÷</button>
+        <button data-number class="calc-btn">1</button>
+        <button data-number class="calc-btn">2</button>
+        <button data-number class="calc-btn">3</button>
+        <button data-operation class="calc-btn">*</button>
+        <button data-number class="calc-btn">4</button>
+        <button data-number class="calc-btn">5</button>
+        <button data-number class="calc-btn">6</button>
+        <button data-operation class="calc-btn">+</button>
+        <button data-number class="calc-btn">7</button>
+        <button data-number class="calc-btn">8</button>
+        <button data-number class="calc-btn">9</button>
+        <button data-operation class="calc-btn">-</button>
+        <button data-number class="calc-btn">.</button>
+        <button data-number class="calc-btn">0</button>
+        <button data-equals class="span-two calc-btn">=</button>
+    </div>
+    
+
+    <script type="module" >
+        import ola from '../ts/dist/index.js';
+        ola();
+    </script>
+    <script src="../ts/dist/index.js"></script>
+</body>
+</html>

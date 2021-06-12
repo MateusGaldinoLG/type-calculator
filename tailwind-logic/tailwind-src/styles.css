@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .calc-btn{
+        @apply cursor-pointer text-3xl border-white border-1 bg-white bg-opacity-75 hover:bg-white hover:bg-opacity-90
+    }
+    .span-two{
+        @apply col-span-2
+    }
+}

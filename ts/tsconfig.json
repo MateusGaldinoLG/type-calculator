@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "rootDir": "src",
+        "outDir": "dist",
+        "removeComments": true,
+        "allowUnreachableCode": false,
+
+        //strict
+        "noImplicitReturns": true,
+        "strict": true,
+        "noUnusedLocals": true,
+    }
+}
