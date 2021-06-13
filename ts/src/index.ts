@@ -3,8 +3,9 @@ class Calculator{
     currentOperandTextElement: Element | null;
     currentOperand: string = '';
     previousOperand: string = '';
-    operation: string | undefined;
+    operation: string | null | undefined;
     constructor(previousOperandTextElement: Element | null, currentOperandTextElement: Element | null){
+        this.operation = '';
         this.previousOperandTextElement = previousOperandTextElement
         this.currentOperandTextElement = currentOperandTextElement
     }
@@ -12,11 +13,11 @@ class Calculator{
     clear(): void{
         this.currentOperand = '';
         this.previousOperand = '';
-        this.operation = undefined;
+        this.operation = null;
     } //clear all inputs
 
     delete(){
-
+        this.currentOperand = this.currentOperand.slice(0, -1); //from first to second-to-last
     }
 
     appendNumber(number: number | string): void{
@@ -28,7 +29,7 @@ class Calculator{
         if(this.currentOperand === '') return;
         if(this.previousOperand !== ''){
             this.compute();
-        }
+        } //because compute comes first, whenever you do another computation it carries on with the last
         this.operation = operation;
         this.previousOperand = this.currentOperand;
         this.currentOperand = '';
@@ -39,11 +40,38 @@ class Calculator{
         const prev: number = parseFloat(this.previousOperand);
         const current: number = parseFloat(this.currentOperand);
         if(isNaN(prev) || isNaN(current)){ return; }
+        switch(this.operation){
+            case '+':
+                computation = prev + current;
+                break;
+            case '-':
+                computation = prev - current;
+                break;
+            case '*':
+                computation = prev * current;
+                break;
+            case '/':
+                computation = prev / current;
+                break;
+            default: 
+                return;
+        }
+
+        this.currentOperand = computation.toString();
+        this.operation = undefined;
+        this.previousOperand  = '';
     }
 
     updateDisplay(): void{
         this.currentOperandTextElement!.innerHTML = this.currentOperand;
-        this.previousOperandTextElement!.innerHTML = this.previousOperand;
+        if(this.operation !== null && this.operation != undefined){
+            //console.log((<HTMLElement> this.previousOperandTextElement).innerText);
+            (<HTMLElement> this.previousOperandTextElement).innerText = `${this.previousOperand} ${this.operation}`
+        }else if(this.operation == undefined){
+            //console.log((<HTMLElement> this.previousOperandTextElement).innerText);
+            (<HTMLElement> this.previousOperandTextElement).innerText = '';
+        }
+        //console.log((<HTMLElement> this.previousOperandTextElement).innerText)
     }
 }
 
@@ -79,5 +107,15 @@ operationButtons.forEach(button => {
 
 equalsButton!.addEventListener('click', button =>{
     calculator.compute();
+    calculator.updateDisplay();
+})
+
+allClearButton!.addEventListener('click', button =>{
+    calculator.clear();
+    calculator.updateDisplay();
+})
+
+deleteButton!.addEventListener('click', button =>{
+    calculator.delete();
     calculator.updateDisplay();
 })
