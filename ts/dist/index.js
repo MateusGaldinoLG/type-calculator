@@ -48,7 +48,7 @@ class Calculator {
             case '*':
                 computation = prev * current;
                 break;
-            case '/':
+            case '÷':
                 computation = prev / current;
                 break;
             default:
@@ -58,10 +58,28 @@ class Calculator {
         this.operation = undefined;
         this.previousOperand = '';
     }
+    getDisplayNumber(number) {
+        const stringNumber = number.toString();
+        const integerDigits = parseFloat(stringNumber.split('.')[0]);
+        const decimalDigits = parseFloat(stringNumber.split('.')[1]);
+        let integerDisplay;
+        if (isNaN(integerDigits)) {
+            integerDisplay = '';
+        }
+        else {
+            integerDisplay = integerDigits.toLocaleString('pt-br', { maximumFractionDigits: 0 });
+        }
+        if (decimalDigits != null && !isNaN(decimalDigits)) {
+            return `${integerDisplay},${decimalDigits}`;
+        }
+        else {
+            return integerDisplay;
+        }
+    }
     updateDisplay() {
-        this.currentOperandTextElement.innerHTML = this.currentOperand;
+        this.currentOperandTextElement.innerHTML = this.getDisplayNumber(this.currentOperand);
         if (this.operation !== null && this.operation != undefined) {
-            this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`;
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
         }
         else if (this.operation == undefined) {
             this.previousOperandTextElement.innerText = '';

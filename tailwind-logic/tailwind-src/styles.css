@@ -4,7 +4,7 @@
 
 @layer components{
     .calc-btn{
-        @apply cursor-pointer text-3xl border-white border-1 bg-white bg-opacity-75 hover:bg-white hover:bg-opacity-90
+        @apply cursor-pointer text-2xl-alt sm:text-xs border-white border-1 bg-white bg-opacity-75 hover:bg-white hover:bg-opacity-90
     }
     .span-two{
         @apply col-span-2

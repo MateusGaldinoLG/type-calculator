@@ -50,7 +50,7 @@ class Calculator{
             case '*':
                 computation = prev * current;
                 break;
-            case '/':
+            case '÷':
                 computation = prev / current;
                 break;
             default: 
@@ -62,11 +62,32 @@ class Calculator{
         this.previousOperand  = '';
     }
 
+    getDisplayNumber(number: string): string{
+        const stringNumber: string = number.toString();
+        const integerDigits: number = parseFloat(stringNumber.split('.')[0]);
+        const decimalDigits: number = parseFloat(stringNumber.split('.')[1]);
+        let integerDisplay: string;
+
+        if(isNaN(integerDigits)){
+            integerDisplay = '';
+            
+        }else{
+            integerDisplay = integerDigits.toLocaleString('pt-br', {maximumFractionDigits: 0})
+        }
+
+        if(decimalDigits != null && !isNaN(decimalDigits)){
+            //console.log(decimalDigits);
+            return `${integerDisplay},${decimalDigits}`;
+        } else{
+            return integerDisplay;
+        }
+    }
+
     updateDisplay(): void{
-        this.currentOperandTextElement!.innerHTML = this.currentOperand;
+        this.currentOperandTextElement!.innerHTML = this.getDisplayNumber(this.currentOperand);
         if(this.operation !== null && this.operation != undefined){
             //console.log((<HTMLElement> this.previousOperandTextElement).innerText);
-            (<HTMLElement> this.previousOperandTextElement).innerText = `${this.previousOperand} ${this.operation}`
+            (<HTMLElement> this.previousOperandTextElement).innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
         }else if(this.operation == undefined){
             //console.log((<HTMLElement> this.previousOperandTextElement).innerText);
             (<HTMLElement> this.previousOperandTextElement).innerText = '';
